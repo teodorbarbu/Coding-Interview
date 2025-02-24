@@ -1,15 +1,16 @@
-function removeDuplicates1(arr) {
-  const uniqueArr = [];
-  for (let i = 0; i < arr.length; i++) {
-    if (!uniqueArr.includes(arr[i])) {
-      uniqueArr.push(arr[i]);
+function fizzBuzz(n) {
+  let arr = [];
+  for (let i = 1; i <= n; i++) {
+    if (i % 3 === 0 && i % 5 === 0) {
+      arr.push("FizzBuzz");
+    } else if (i % 3 === 0) {
+      arr.push("Fizz");
+    } else if (i % 5 === 0) {
+      arr.push("Buzz");
+    } else {
+      arr.push(i);
     }
   }
-  return uniqueArr;
+  return arr;
 }
-function removeDuplicates(arr) {
-  return Array.from(new Set(arr));
-}
-console.log(removeDuplicates([1, 2, 3, 2, 4, 1, 5]));
-console.log(removeDuplicates(["apple", "banana", "orange", "banana", "kiwi"]));
-console.log(removeDuplicates([true, true, false, true, false]));
+console.log(fizzBuzz(30));

@@ -1,16 +1,26 @@
-function fizzBuzz(n) {
-  let arr = [];
-  for (let i = 1; i <= n; i++) {
-    if (i % 3 === 0 && i % 5 === 0) {
-      arr.push("FizzBuzz");
-    } else if (i % 3 === 0) {
-      arr.push("Fizz");
-    } else if (i % 5 === 0) {
-      arr.push("Buzz");
-    } else {
-      arr.push(i);
+function intersectionArray1(arr1, arr2) {
+  const intersectionArr = [];
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr2.includes(arr1[i])) {
+      intersectionArr.push(arr1[i]);
     }
   }
-  return arr;
+  return intersectionArr;
 }
-console.log(fizzBuzz(30));
+
+function intersectionArray(arr1, arr2) {
+  const set = new Set(arr1);
+  const intersectionArr = [];
+  for (let num of arr2) {
+    if (set.has(num)) {
+      intersectionArr.push(num);
+    }
+  }
+  return intersectionArr;
+}
+
+console.log(intersectionArray([1, 2, 3, 4, 5], [3, 4, 5, 6, 7])); //[ 3, 4, 5 ]
+
+console.log(intersectionArray([10, 20, 30], [30, 40, 50])); //[ 30 ]
+
+console.log(intersectionArray([1, 2, 3], [4, 5, 6])); //[]

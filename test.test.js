@@ -1,56 +1,24 @@
-function chunk1(array, size) {
-  const chunked = [];
-  for (let element of array) {
-    const last = chunked[chunked.length - 1];
-    if (!last || last.length === size) {
-      chunked.push([element]);
-    } else {
-      last.push(element);
-    }
+function displayLikes(names) {
+  const length = names.length;
+  if (length === 0) {
+    return "no one likes this";
+  } else if (length === 1) {
+    return `${names[0]} likes this`;
+  } else if (length === 2) {
+    return `${names[0]} and ${names[1]} like this`;
+  } else if (length === 3) {
+    return `${names[0]}, ${names[1]}, and ${names[2]} like this`;
+  } else {
+    return `${names[0]}, ${names[1]}, and ${length - 2} others like this`;
   }
-  return chunked;
 }
 
-function chunk2(array, size) {
-  const chunked = [];
-  let index = 0;
-  while (index < array.length) {
-    chunked.push(array.slice(index, index + size));
-    index += size;
-  }
-  return chunked;
-}
+console.log(displayLikes([])); //'no one likes this'
+console.log(displayLikes(["Peter"])); //'Peter likes this'
+console.log(displayLikes(["Jacob", "Alex"])); //'Jacob and Alex like this'
+console.log(displayLikes(["Max", "John", "Mark"])); //'Max, John and Mark like this'
 
-function chunk3(arr, size) {
-  const res = [];
-  let subarr = [];
-  for (let i = 0; i < arr.length; i++) {
-    subarr.push(arr[i]);
-    if (subarr.length === size) {
-      res.push(subarr);
-      subarr = [];
-    }
-  }
-  if (subarr.length) {
-    res.push(subarr);
-  }
-  return res;
-}
-
-function chunk(arr, size) {
-  const res = [];
-  for (let i = 0; i < arr.length; i += size) {
-    res.push(arr.slice(i, i + size));
-  }
-  return res;
-}
-
-console.log(chunk([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 2));
-// [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10]]
-console.log(chunk([1, 2, 3], 1));
-// [[1], [2], [3]]
-console.log(chunk([1, 2, 3, 4, 5], 3));
-// [[1, 2, 3], [4, 5]]
-
-console.log(chunk([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], 5));
-//([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13]])
+console.log(displayLikes(["Alex", "Jacob", "Mark", "Max"]));
+//'Alex, Jacob and 2 others like this'
+console.log(displayLikes(["Alex", "Jacob", "Mark", "Max", "Jill"]));
+//'Alex, Jacob and 3 others like this'

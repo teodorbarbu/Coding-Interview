@@ -1,24 +1,32 @@
-function displayLikes(names) {
-  const length = names.length;
-  if (length === 0) {
-    return "no one likes this";
-  } else if (length === 1) {
-    return `${names[0]} likes this`;
-  } else if (length === 2) {
-    return `${names[0]} and ${names[1]} like this`;
-  } else if (length === 3) {
-    return `${names[0]}, ${names[1]}, and ${names[2]} like this`;
-  } else {
-    return `${names[0]}, ${names[1]}, and ${length - 2} others like this`;
+function anagrams1(stringA, stringB) {
+  const aCharMap = buildCharMap(stringA);
+  const bCharMap = buildCharMap(stringB);
+
+  if (Object.keys(aCharMap).length !== Object.keys(bCharMap).length) {
+    return false;
   }
+  for (let char in aCharMap) {
+    if (aCharMap[char] !== bCharMap[char]) {
+      return false;
+    }
+  }
+  return true;
+}
+function buildCharMap(str) {
+  const charMap = {};
+  for (let char of str.replace(/[^\w]/g, "").toLowerCase()) {
+    charMap[char] = charMap[char] + 1 || 1;
+  }
+  return charMap;
 }
 
-console.log(displayLikes([])); //'no one likes this'
-console.log(displayLikes(["Peter"])); //'Peter likes this'
-console.log(displayLikes(["Jacob", "Alex"])); //'Jacob and Alex like this'
-console.log(displayLikes(["Max", "John", "Mark"])); //'Max, John and Mark like this'
+function anagrams(stringA, stringB) {
+  return cleanString(stringA) === cleanString(stringB);
+}
+function cleanString(str) {
+  return str.replace(/[^\w]/g, "").toLowerCase().split("").sort().join("");
+}
 
-console.log(displayLikes(["Alex", "Jacob", "Mark", "Max"]));
-//'Alex, Jacob and 2 others like this'
-console.log(displayLikes(["Alex", "Jacob", "Mark", "Max", "Jill"]));
-//'Alex, Jacob and 3 others like this'
+console.log(anagrams("hello", "llohe"));
+console.log(anagrams("Whoa! Hi!", "Hi! Whoa!"));
+console.log(anagrams("A tree, a life, a bench", "A tree, a fence, a yard"));
